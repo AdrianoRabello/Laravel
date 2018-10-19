@@ -78,7 +78,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // linguagem da aplicação
+    'locale' => 'pt-BR',
 
     /*
     |--------------------------------------------------------------------------
@@ -91,7 +92,9 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+
+    // linguagem da aplicação
+    'fallback_locale' => 'pt-BR',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,6 +162,12 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+
+        JeroenNoten\LaravelAdminLte\ServiceProvider::class,
+
+
+
 
     ],
 
