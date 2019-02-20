@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Balance;
 use App\Http\Requests\MoneyValidationFormRequest;
+Use App\User;
 
 class BalanceController extends Controller
 {
@@ -88,9 +89,57 @@ class BalanceController extends Controller
     }
 
 
-    public function confirmTransfer(Request $request)
+    public function teste()
     {
+      return view('admin.balance.teste');
+    }
 
-      return dd($request->sender);
+
+    public function confirmTransfer(Request $request, User $user)
+    {
+      //procura o usuario pelo email ou nome
+      $sender = $user->getSender($request->sender);
+      if (!$sender) {
+        return redirect()
+               ->back()
+               ->with('error','Usuario não encontrado');
+      }
+
+      if ($sender->id === auth()->user()->id) {
+        return redirect()
+               ->back()
+               ->with('error','Não pode transferir para você mesmo');
+      }
+
+      $balance = auth()->user()->balance;
+
+      return view('admin.balance.transfer-confirm',compact('sender','balance'));
+
+    }
+
+    public function transferStore(MoneyValidationFormRequest $request, User $user)
+    {
+      //dd($request->all());
+
+      if(!$user->find($request->sender_id))
+      {
+        return redirect()->route('admin.balance')
+                         ->with('error','Receptor não encontrado');
+      }
+
+      return "teste";
+      //$balance = auth()->user()->blance()->firstOrCreate([]);
+
+      //$response = $balance->transfer($request->value);
+
+      /*if ($response['success']) {
+        return redirect()->route('admin.balance')
+                         ->with('success',$response['message']);
+      }else{
+
+        return redirect()->back()->with('error',$response['message']);
+      }*/
+
+
     }
 }

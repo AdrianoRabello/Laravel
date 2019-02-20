@@ -7,6 +7,7 @@ use DB;
 
 
 
+
 class Balance extends Model
 {
     //
@@ -14,6 +15,11 @@ class Balance extends Model
     public $timestamps = false;
 
     protected $fillable = ['amount'];
+
+
+
+
+
 
 
     public function deposit(float $value): Array
@@ -99,4 +105,25 @@ class Balance extends Model
       ];
 
     }
+
+    // pega o valor do campo amount e adiciona mais 30
+    public function getAmountAttribute($value)
+    {
+      return $value;
+
+    }
+
+    // atribui ao valor de amount o valor que vem em value
+    public function setAmountAttribute($value)
+    {
+      $this->attributes['amount'] =+ $value;
+
+    }
+
+
+    
+
+
+
+
 }

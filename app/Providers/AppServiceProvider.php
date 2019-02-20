@@ -14,8 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
+        //para poder colocar a quantidade de campos grande no BD
         Schema::defaultStringLength(191);
     }
 

@@ -32,11 +32,18 @@ $this->group(['middleware'=>'auth','namespace'=>'Admin','prefix'=>'admin'],funct
 
   $this->post('confirm-transfer','BalanceController@confirmTransfer')->name('confirm.transfer');
 
+  $this->post('tranfer','BalanceController@transferStore')->name('transfer.store');
+
+
+  $this->get('teste','BalanceController@teste');
+
 
 });
 
 
-Route::get('/','Site\SiteController@index');
+//Route::get('/','Site\SiteController@index');
+
+Route::redirect('/','/login');
 
 
 

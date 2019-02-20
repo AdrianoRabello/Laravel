@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+Use App\User;
+Use App\Models\Balance;
+use DB;
+
 
 class AdminController extends Controller
 {
@@ -16,9 +20,19 @@ class AdminController extends Controller
     {
         //
 
-        return view('admin.home.index');
+        //return view('admin.home.index');
 
+       // pega todos os dados do usuario
 
+       $balance = auth()->user()->balance;
+       $amount = $balance? $balance->amount : 0;
+       $user = auth()->user();
+       //Balance::
+       $itens = DB::table('historics')->paginate(5);
+
+       //$itens->transacoes();
+
+      return view('admin.home.index',compact('amount','user','itens'));
     }
 
     /**

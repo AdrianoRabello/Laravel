@@ -15,8 +15,12 @@ class SiteController extends Controller
     public function index()
     {
         //
+      //return 'teste';
+      //return view('site.home.index');
 
-        return view('site.home.index');
+      Route::redirect('/','login');
+
+
     }
 
     /**
